@@ -23,10 +23,10 @@ Now, you will be able to open the solution, and simply build it in Visual Studio
 
 ## Credits
 * Bases
-[BigBaseV2 (original)](https://github.com/Pocakking/BigBaseV2)
+[BigBaseV2 (original)](https://github.com/Pocakking/BigBaseV2), 
 [BigBaseV2 (spankerincrase fix)](https://bitbucket.org/gir489/bigbasev2-fix)
 
 * People
-[Yimura](https://www.unknowncheats.me/forum/members/2602052.html)
-[sub1to](https://www.unknowncheats.me/forum/members/1532142.html)
+[Yimura](https://www.unknowncheats.me/forum/members/2602052.html), 
+[sub1to](https://www.unknowncheats.me/forum/members/1532142.html), 
 spankerincrease (banned rip)
