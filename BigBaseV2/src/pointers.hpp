@@ -13,6 +13,8 @@ namespace big
 		~pointers();
 	public:
 		HWND m_hwnd{};
+		
+		PVOID m_get_label_text;
 
 		eGameState *m_game_state{};
 		bool *m_is_session_started{};
