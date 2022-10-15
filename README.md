@@ -10,6 +10,7 @@ Updated for GTA 1.61
 * Log console
 * Script fibers
 * Fiber pool
+* BigBaseV1-style custom text hook
 * Native return spoofing
 * Access to YSC script globals
 * scrProgram–based native hook
