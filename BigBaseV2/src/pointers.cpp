@@ -8,6 +8,11 @@ namespace big
 	pointers::pointers()
 	{
 		memory::pattern_batch main_batch;
+		
+		main_batch.add("Get label text", "75 ? E8 ? ? ? ? 8B 0D ? ? ? ? 65 48 8B 04 25 ? ? ? ? BA ? ? ? ? 48 8B 04 C8 8B 0C 02 D1 E9", [this](memory::handle ptr)
+		{
+			m_get_label_text = ptr.sub(19).as<PVOID>();
+		});
 
 		main_batch.add("Game state", "83 3D ? ? ? ? ? 75 17 8B 43 20", [this](memory::handle ptr)
 		{

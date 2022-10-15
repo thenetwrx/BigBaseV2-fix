@@ -11,6 +11,7 @@
 #include "pointers.hpp"
 #include "renderer.hpp"
 #include "script_mgr.hpp"
+#include "custom_text.hpp"
 
 #include <MinHook.h>
 
@@ -33,6 +34,7 @@ namespace big
 	}
 
 	hooking::hooking() :
+		m_get_label_text_hook("Get label text hook", g_pointers->m_get_label_text, &hooks::get_label_text),
 		m_swapchain_hook(*g_pointers->m_swapchain, hooks::swapchain_num_funcs),
 		m_set_cursor_pos_hook("SetCursorPos", memory::module("user32.dll").get_export("SetCursorPos").as<void*>(), &hooks::set_cursor_pos),
 
@@ -56,6 +58,7 @@ namespace big
 
 	void hooking::enable()
 	{
+		m_get_label_text_hook.enable();
 		m_swapchain_hook.enable();
 		m_og_wndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtrW(g_pointers->m_hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&hooks::wndproc)));
 		m_set_cursor_pos_hook.enable();
@@ -76,6 +79,7 @@ namespace big
 		m_set_cursor_pos_hook.disable();
 		SetWindowLongPtrW(g_pointers->m_hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(m_og_wndproc));
 		m_swapchain_hook.disable();
+		m_get_label_text_hook.disable();
 	}
 
 	minhook_keepalive::minhook_keepalive()
@@ -86,6 +90,15 @@ namespace big
 	minhook_keepalive::~minhook_keepalive()
 	{
 		MH_Uninitialize();
+	}
+	
+
+	const char* hooks::get_label_text(void* unk, const char* label)
+	{
+		if (auto text = g_custom_text.get_label_overwrite(label); text != nullptr)
+			return text;
+
+		return g_hooking->m_get_label_text_hook.get_original<decltype(&hooks::get_label_text)>()(unk, label);
 	}
 
 	bool hooks::run_script_threads(std::uint32_t ops_to_execute)

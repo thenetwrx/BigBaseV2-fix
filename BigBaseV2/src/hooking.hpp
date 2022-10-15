@@ -10,6 +10,7 @@ namespace big
 	struct hooks
 	{
 		static bool run_script_threads(std::uint32_t ops_to_execute);
+		static const char* get_label_text(void* unk, const char* label);
 		static void *convert_thread_to_fiber(void *param);
 
 		static constexpr auto swapchain_num_funcs = 19;
@@ -42,6 +43,7 @@ namespace big
 		bool m_enabled{};
 		minhook_keepalive m_minhook_keepalive;
 
+		detour_hook m_get_label_text_hook;
 		vmt_hook m_swapchain_hook;
 		WNDPROC m_og_wndproc;
 		detour_hook m_set_cursor_pos_hook;
