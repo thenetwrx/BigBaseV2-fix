@@ -7,6 +7,7 @@
 #include "pointers.hpp"
 #include "renderer.hpp"
 #include "script_mgr.hpp"
+#include "custom_text.hpp"
 
 BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 {
@@ -54,7 +55,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 				g_hooking->enable();
 				LOG(INFO) << "Hooking enabled.";
-
+				
+				g_custom_text.add_label_overwrite("HUD_JOINING", "Joining GTA Online with BigBaseV2");
+				
 				while (g_running)
 				{
 					std::this_thread::sleep_for(500ms);
