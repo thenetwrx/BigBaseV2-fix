@@ -18,6 +18,7 @@ Updated for GTA 1.61
 ## Building
 To build BigBaseV2 you need:
 * Visual Studio 2022
+* C++ 17 compiler (not hard to update code for C++ 20, but not needed)
 * a fucking brain
 
 Now, you will be able to open the solution, and simply build it in Visual Studio.
